@@ -102,13 +102,13 @@ class Scores:
         res_str = []
         if self.names:
             self.sort()
-            res_str.append(f'\n {st.MsgScoreTitle:<20}')
+            res_str.append(f'\n {st.MSG_SCORE_TITLE:<20}')
             zip_list = list(zip(self.names, self.score))
             for name, score in zip_list[:10]:
                 res_str.append(f"{name:<20}" + f"{score:<20}")
             res_str.append(" ")
         else:
-            res_str.append(st.MsgScoreEmpty)
+            res_str.append(st.MSG_SCORE_EMPTY)
         res_str = '\n'.join(res_str)
         return res_str
 

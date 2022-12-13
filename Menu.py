@@ -17,8 +17,8 @@ class Menu:
         links menu element to function and key
 
         """
-        self.menu_name = st.menu_name
-        self.menu_char = st.menu_char
+        self.menu_name = st.MENU_NAME
+        self.menu_char = st.MENU_CHAR
         self.menu_func = []
         for arg in args:
             self.menu_func.append(arg)
@@ -29,7 +29,7 @@ class Menu:
         :return: None
         Show the menu
         """
-        print(st.MsgMenuHi, self)
+        print(st.MSG_MENU_HI, self)
 
     def __str__(self) -> str:
         """
@@ -53,7 +53,7 @@ class Menu:
         if symb in self.menu_char:
             return True
         else:
-            raise MenuSelectError(st.MsgMenuSelectError + ' '.join(self.menu_char))
+            raise MenuSelectError(st.MSG_MENU_SELECT_ERROR + ' '.join(self.menu_char))
 
     def get_choice(self) -> str:
         """

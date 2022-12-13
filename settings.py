@@ -3,90 +3,90 @@ This module contains the gameplay options
 """
 
 # Keys that match each character
-WarriorsChar = "1"
-RobbersChar = "2"
-WizardsChar = "3"
+WARRIORS_CHAR = "1"
+ROBBERS_CHAR = "2"
+WIZARDS_CHAR = "3"
 
 # Full  names of each character
-WarriorsStr = 'WARRIOR'
-RobbersStr = 'ROBBER'
-WizardsStr = "WIZARD"
+WARRIORS_STR = 'WARRIOR'
+ROBBERS_STR = 'ROBBER'
+WIZARDS_STR = "WIZARD"
 
 # Names of stages
-MsgNameAttackStage = 'You attack'
-MsgNameDefenceStage = 'You defence'
+MSG_NAME_ATTACK_STAGE = 'You attack'
+MSG_NAME_DEFENCE_STAGE = 'You defence'
 
 # Results of "Defence stage"
-MsgDefenceSuccess = 'YOUR DEFENCE IS SUCCESSFUL!'
-MsgDefenceFailed = 'YOUR DEFENCE IS FAILED!'
-MsgDefenceDraw = 'IT\'S A DRAW!'
+MSG_DEFENCE_SUCCESS = 'YOUR DEFENCE IS SUCCESSFUL!'
+MSG_DEFENCE_FAILED = 'YOUR DEFENCE IS FAILED!'
+MSG_DEFENCE_DRAW = 'IT\'S A DRAW!'
 
 # Results of "Attack stage"
-MsgAttackSuccess = 'YOUR ATTACK IS SUCCESSFUL!'
-MsgAttackFailed = 'YOUR ATTACK IS FAILED!'
-MsgAttackDraw = 'IT\'S DRAW!'
+MSG_ATTACK_SUCCESS = 'YOUR ATTACK IS SUCCESSFUL!'
+MSG_ATTACK_FAILED = 'YOUR ATTACK IS FAILED!'
+MSG_ATTACK_DRAW = 'IT\'S DRAW!'
 
 # The parameter contains an invitation text to enter a player name
-MsgEnterName = 'Please, enter name player:'
+MSG_ENTER_NAME = 'Please, enter name player:'
 
 # The parameter contains information message about the player name requirement
-MsgNameError = 'Name must meet the identification requirements and longer one symbol'
+MSG_NAME_ERROR = 'Name must meet the identification requirements and longer one symbol'
 
 # The parameter contains information message about keys to select character
-MsgPressKeyError = 'Please, press one of these keys: '
+MSG_PRESS_KEY_ERROR = 'Please, press one of these keys: '
 
 # The parameter contains information message about errors of logical operation
-MsgTypeError = '{0} not supported between instances of {1} and {2}'
+MSG_TYPE_ERROR = '{0} not supported between instances of {1} and {2}'
 
 # Information message about player Health done
-MsgHealthError = 'You is done!'
+MSG_HEALTH_ERROR = 'You is done!'
 
 # Information message about player enemy done
-MsgEnemyDone = 'Enemy is down!'
+MSG_ENEMY_DONE = 'Enemy is down!'
 # Information message about player get extra points after enemy is done
-MsgExtraPoints = 'Your get extra points - {0}'
+MSG_EXTRA_POINTS = 'Your get extra points - {0}'
 
 # Information message about KeyboardInterrupt
-MsgGoodbye = 'Game over!'
+MSG_GOODBYE = 'Game over!'
 
 # Information message about current players parameters
-InfoPlayerName = "name: "
-InfoPlayerHealth = "health: "
-InfoPlayerScore = "score: "
+INFO_PLAYER_NAME = "name: "
+INFO_PLAYER_HEALTH = "health: "
+INFO_PLAYER_SCORE = "score: "
 
 # Information message about current enemy parameters
-InfoEnemyHealth = "Enemy health: "
-InfoEnemyLevel = "Enemy level: "
+INFO_ENEMY_HEALTH = "Enemy health: "
+INFO_ENEMY_LEVEL = "Enemy level: "
 
 # Information message about choice of enemy
-InfoEnemyChoice = "Enemy choice: "
+INFO_ENEMY_CHOICE = "Enemy choice: "
 
 # Information message about num of current Round
-InfoRoundNum = "***** Round № {0} *****"
+INFO_ROUND_NUM = "***** Round № {0} *****"
 
 # starts  Health points of player
-HealthPointsIni = 5
+HEALTH_POINTS_INI = 5
 
 # score points of player at start game
-ScoreIni = 0
+SCORE_INI = 0
 # number points decrease health player after her is done
-DecreaseHealthStep = 1
+DECREASE_HEALTH_STEP = 1
 
 # number points decrease health enemy after her is done
-EnemyHealthDown = 1
+ENEMY_HEALTH_DOWN = 1
 
 # enemy level at start game
-StartEnemyLevelIni = 5
+START_ENEMY_LEVEL_INI = 5
 
 # number of points that player get after win stage
-PointWin = 5
+POINT_WIN = 5
 # number of points that player get after enemy is down
-PointExtra = 10
+POINT_EXTRA = 10
 
 # Parameters determine the match of battle results
-DrawResult = 0
-WinResult = 1
-FailedResult = -1
+DRAW_RESULT = 0
+WIN_RESULT = 1
+FAILED_RESULT = -1
 
 
 def isidentifier(name_player: str) -> bool:
@@ -108,19 +108,19 @@ def isbigger(name_player: str) -> bool:
 
 
 # list the list contains a list of features that check to meet the requirements of the player name
-NamePlayerRequirements = [isidentifier, isbigger]
+name_player_requirements_funcs = [isidentifier, isbigger]
 
 # setting for menu
-menu_name = ['Play', 'Scores', 'Exit']
-menu_char = ['P', 'S', 'E']
-MsgMenuSelectError = 'Please, press one of these keys: '
-MsgMenuHi = 'AVAILABLE MENU CHOICES: '
+MENU_NAME = ['Play', 'Scores', 'Exit']
+MENU_CHAR = ['P', 'S', 'E']
+MSG_MENU_SELECT_ERROR = 'Please, press one of these keys: '
+MSG_MENU_HI = 'AVAILABLE MENU CHOICES: '
 
 # setting for scores
-FileNameScore = 'scores.txt'
-MsgInfoScore = 'You get {0} points'
-MsgScoreTitle = """
+FILE_NAME_SCORE = 'scores.txt'
+MSG_INFO_SCORE = 'You get {0} points'
+MSG_SCORE_TITLE = """
         Scores
 Name            Points
 """
-MsgScoreEmpty = 'Score  is empty'
+MSG_SCORE_EMPTY = 'Score  is empty'

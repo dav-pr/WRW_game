@@ -33,7 +33,7 @@ class Round:
             self.play_strike = [player_inst.select_attack, player_inst.select_defence]
         if isinstance(enemy_inst, Enemy):
             self.enemy_strike = [enemy_inst.select_defence, enemy_inst.select_attack]
-        self.stages_name = [st.MsgNameAttackStage, st.MsgNameDefenceStage]
+        self.stages_name = [st.MSG_NAME_ATTACK_STAGE, st.MSG_NAME_DEFENCE_STAGE]
         self.current_stage = 0
         self.round_num = 1
         self.new_round = True
@@ -80,10 +80,10 @@ class Play:
             except PlayerNameError as er:
                 print(er.args[0])
 
-        self.enemy_inst = Enemy(st.StartEnemyLevelIni)
+        self.enemy_inst = Enemy(st.START_ENEMY_LEVEL_INI)
         self.round = Round(self.player_inst, self.enemy_inst)
         self.game_over = False
-        self.scores = Scores(st.FileNameScore)
+        self.scores = Scores(st.FILE_NAME_SCORE)
 
     @staticmethod
     def get_player_name() -> str:
@@ -92,7 +92,7 @@ class Play:
         :return: input name of player
         Method get input name player and validate his.
         """
-        print(st.MsgEnterName)
+        print(st.MSG_ENTER_NAME)
         player_name = input().strip()
         return player_name
 
@@ -103,7 +103,7 @@ class Play:
         Method print current information about Round, Enemy and Player (health, score etc.)
         """
         if self.round.new_round:
-            print('\n', st.InfoRoundNum.format(self.round.round_num))
+            print('\n', st.INFO_ROUND_NUM.format(self.round.round_num))
         print('\n', self.enemy_inst)
         print(self.player_inst)
 
@@ -115,9 +115,9 @@ class Play:
         Method process GameOver stage. Turn on flag "game_over" and print massage.
         """
         print(msg)
-        print(st.MsgInfoScore.format(self.player_inst.score))
+        print(st.MSG_INFO_SCORE.format(self.player_inst.score))
         self.scores.add(self.player_inst.name, self.player_inst.score)
-        self.scores.save(st.FileNameScore)
+        self.scores.save(st.FILE_NAME_SCORE)
         self.game_over = True
 
     def processing_of_the_results(self, res_fight) -> None:
@@ -134,19 +134,19 @@ class Play:
          - call game_stop()
         """
         try:
-            if res_fight == st.WinResult:
-                self.player_inst.score += st.PointWin
+            if res_fight == st.WIN_RESULT:
+                self.player_inst.score += st.POINT_WIN
                 self.enemy_inst.descrease_health()
-            elif res_fight == st.FailedResult:
+            elif res_fight == st.FAILED_RESULT:
                 self.player_inst.decrease_health()
             self.round.next_stage()
 
         except EnemyDownError as er:
             print(er.args[0])
-            print(st.MsgExtraPoints.format(st.PointExtra))
+            print(st.MSG_EXTRA_POINTS.format(st.POINT_EXTRA))
             self.enemy_inst = Enemy(self.enemy_inst.level + 1)
             self.round = Round(self.player_inst, self.enemy_inst)
-            self.player_inst.score += st.PointExtra
+            self.player_inst.score += st.POINT_EXTRA
 
         except GameOverError as er:
 
@@ -160,11 +160,11 @@ class Play:
         Method print result of fight.
         Test that the output depends on the round stage
         """
-        results = [st.DrawResult, st.WinResult, st.FailedResult]
+        results = [st.DRAW_RESULT, st.WIN_RESULT, st.FAILED_RESULT]
         if self.round.current_stage == 0:
-            result_msg = [st.MsgAttackDraw, st.MsgAttackSuccess, st.MsgAttackFailed]
+            result_msg = [st.MSG_ATTACK_DRAW, st.MSG_ATTACK_SUCCESS, st.MSG_ATTACK_FAILED]
         else:
-            result_msg = [st.MsgDefenceDraw, st.MsgDefenceSuccess, st.MsgDefenceFailed]
+            result_msg = [st.MSG_DEFENCE_DRAW, st.MSG_DEFENCE_SUCCESS, st.MSG_DEFENCE_FAILED]
         for result, msg in zip(results, result_msg):
             if res_fight == result:
                 print(msg)
@@ -199,7 +199,7 @@ class Play:
             self.game_stop(er.args[0])
 
         except KeyboardInterrupt:
-            print('\n', st.MsgGoodbye)
+            print('\n', st.MSG_GOODBYE)
 
     @staticmethod
     def exit_script() -> None:
@@ -208,7 +208,7 @@ class Play:
         :return: None
         Method implement output "goodbye" message and exit from process
         """
-        print('\n', st.MsgGoodbye)
+        print('\n', st.MSG_GOODBYE)
         sys.exit()
 
 
@@ -219,5 +219,5 @@ if __name__ == '__main__':
         menu = Menu(play_inst.play, play_inst.scores.show, play_inst.exit_script)
         menu.start()
     except KeyboardInterrupt:
-        print('\n', st.MsgGoodbye)
+        print('\n', st.MSG_GOODBYE)
         sys.exit()

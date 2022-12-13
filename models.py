@@ -18,9 +18,9 @@ class Hero:
 
 
     """
-    name = [st.WarriorsChar, st.RobbersChar, st.WizardsChar]
+    name = [st.WARRIORS_CHAR, st.ROBBERS_CHAR, st.WIZARDS_CHAR]
     hierarchy = [1, 2, 0]
-    full_name = [st.WarriorsStr, st.RobbersStr, st.WizardsStr]
+    full_name = [st.WARRIORS_STR, st.ROBBERS_STR, st.WIZARDS_STR]
 
     def __init__(self, symb: str) -> None:
         """
@@ -33,7 +33,7 @@ class Hero:
         if symb in self.name:
             self.name_ist = symb
         else:
-            raise IdHeroError(st.MsgPressKeyError + ' '.join(self.name))
+            raise IdHeroError(st.MSG_PRESS_KEY_ERROR + ' '.join(self.name))
 
     def __next__(self) -> None:
         """
@@ -58,7 +58,7 @@ class Hero:
         if isinstance(other, Hero):
             return self.name_ist == other.name_ist or False
         else:
-            raise TypeError(st.MsgTypeError.format('==', type(self), type(other)))
+            raise TypeError(st.MSG_TYPE_ERROR.format('==', type(self), type(other)))
 
     def __gt__(self, other: object) -> bool:
         """
@@ -72,7 +72,7 @@ class Hero:
         if isinstance(other, Hero):
             return self.__next__() == other.name_ist or False
         else:
-            raise TypeError(st.MsgTypeError.format('>', type(self), type(other)))
+            raise TypeError(st.MSG_TYPE_ERROR.format('>', type(self), type(other)))
 
     def __str__(self) -> str:
         """
@@ -103,14 +103,14 @@ class Player:
 
         if self.validate_name(name):
             self.name = name.capitalize()
-            self.hp = st.HealthPointsIni
-            self.score = st.ScoreIni
+            self.hp = st.HEALTH_POINTS_INI
+            self.score = st.SCORE_INI
         else:
-            raise PlayerNameError(st.MsgNameError)
+            raise PlayerNameError(st.MSG_NAME_ERROR)
 
     def reset(self):
-        self.hp = st.HealthPointsIni
-        self.score = st.ScoreIni
+        self.hp = st.HEALTH_POINTS_INI
+        self.score = st.SCORE_INI
 
     @staticmethod
     def validate_name(name: str) -> bool:
@@ -120,7 +120,7 @@ class Player:
         Method check player name, that is entered, the requirements
         """
 
-        for func in st.NamePlayerRequirements:
+        for func in st.name_player_requirements_funcs:
             if not func(name):
                 return False
         return True
@@ -131,9 +131,9 @@ class Player:
         If this value becomes less that 1 (one) the GameOver exception is raised.
         If health of enemy lower EnemyHealthDown to raise GameOverError
         """
-        self.hp -= st.DecreaseHealthStep
-        if self.hp < st.EnemyHealthDown:
-            raise GameOverError(st.MsgHealthError)
+        self.hp -= st.DECREASE_HEALTH_STEP
+        if self.hp < st.ENEMY_HEALTH_DOWN:
+            raise GameOverError(st.MSG_HEALTH_ERROR)
 
     def select_attack(self) -> Hero:
         """
@@ -145,7 +145,7 @@ class Player:
             msg = ''
             for key, name in zip(Hero.name, Hero.full_name):
                 msg += key + '-' + name + ' '
-            print(st.MsgPressKeyError + msg)
+            print(st.MSG_PRESS_KEY_ERROR + msg)
             key = input()
             res = Hero(key)
             return res
@@ -171,11 +171,11 @@ class Player:
         Performs fight result calculation and return it back.
         """
         if attack_pl == defence_bot:
-            return st.DrawResult
+            return st.DRAW_RESULT
         elif attack_pl > defence_bot:
-            return st.WinResult
+            return st.WIN_RESULT
         else:
-            return st.FailedResult
+            return st.FAILED_RESULT
 
     def attack(self, enemy_inst: object):
         """
@@ -200,9 +200,9 @@ class Player:
         """
 
         res_str = []
-        res_str.append(st.InfoPlayerName + self.name)
-        res_str.append(st.InfoPlayerHealth + str(self.hp))
-        res_str.append(st.InfoPlayerScore + str(self.score))
+        res_str.append(st.INFO_PLAYER_NAME + self.name)
+        res_str.append(st.INFO_PLAYER_HEALTH + str(self.hp))
+        res_str.append(st.INFO_PLAYER_SCORE + str(self.score))
         return " ".join(res_str)
 
 
@@ -223,9 +223,9 @@ class Enemy:
         If this value becomes less that 1 (one) the EnemyDown exception is raised.
         :return:
         """
-        self.hp -= st.DecreaseHealthStep
-        if self.hp < st.EnemyHealthDown:
-            raise EnemyDownError(st.MsgEnemyDone)
+        self.hp -= st.DECREASE_HEALTH_STEP
+        if self.hp < st.ENEMY_HEALTH_DOWN:
+            raise EnemyDownError(st.MSG_ENEMY_DONE)
 
     def select_attack(self) -> Hero:
         """
@@ -251,17 +251,17 @@ class Enemy:
         """
 
         if not isinstance(self.last_strike, type(None)):
-            print(st.InfoEnemyChoice, self.last_strike)
+            print(st.INFO_ENEMY_CHOICE, self.last_strike)
 
     def __str__(self):
         """
         :return: string representation  of instance  Enemy class
         Method implement string representation  of instance  Enemy class
         """
-        return st.InfoEnemyHealth + str(self.hp) + ' ' + st.InfoEnemyLevel + str(self.level)
+        return st.INFO_ENEMY_HEALTH + str(self.hp) + ' ' + st.INFO_ENEMY_LEVEL + str(self.level)
 
 
 if __name__ == '__main__':
-    war = Hero(st.WarriorsChar)
-    rob = Hero(st.RobbersChar)
-    wiz = Hero(st.WizardsChar)
+    war = Hero(st.WARRIORS_CHAR)
+    rob = Hero(st.ROBBERS_CHAR)
+    wiz = Hero(st.WIZARDS_CHAR)
